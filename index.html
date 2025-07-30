@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Quiz de Geografia</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: #e0f7fa;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .quiz-container {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+      padding: 30px;
+      width: 400px;
+      text-align: center;
+    }
+    h1 {
+      color: #00796b;
+    }
+    .question {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+    .btn {
+      display: block;
+      background: #00796b;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      margin: 10px auto;
+      width: 80%;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .btn:hover {
+      background: #004d40;
+    }
+    #score {
+      margin-top: 20px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<div class="quiz-container">
+  <h1>Quiz de Geografia 🌎</h1>
+  <div id="quiz">
+    <div class="question" id="question">Carregando pergunta...</div>
+    <button class="btn" onclick="responder(0)" id="btn0"></button>
+    <button class="btn" onclick="responder(1)" id="btn1"></button>
+    <button class="btn" onclick="responder(2)" id="btn2"></button>
+    <button class="btn" onclick="responder(3)" id="btn3"></button>
+    <div id="score"></div>
+  </div>
+</div>
+
+<script>
+  const perguntas = [
+    {
+      pergunta: "Qual é o maior país do mundo em extensão territorial?",
+      respostas: ["Canadá", "China", "Estados Unidos", "Rússia"],
+      correta: 3
+    },
+    {
+      pergunta: "Qual é o rio mais extenso do mundo?",
+      respostas: ["Amazonas", "Nilo", "Yangtzé", "Mississippi"],
+      correta: 1
+    },
+    {
+      pergunta: "Quantos continentes existem?",
+      respostas: ["5", "6", "7", "8"],
+      correta: 2
+    },
+    {
+      pergunta: "Onde fica o deserto do Saara?",
+      respostas: ["África", "Ásia", "América do Sul", "Austrália"],
+      correta: 0
+    }
+  ];
+
+  let perguntaAtual = 0;
+  let pontos = 0;
+
+  function mostrarPergunta() {
+    if (perguntaAtual >= perguntas.length) {
+      document.getElementById("quiz").innerHTML = `<h2>Quiz finalizado! 🏁</h2><p id="score">Você acertou ${pontos} de ${perguntas.length} perguntas.</p>`;
+      return;
+    }
+
+    const p = perguntas[perguntaAtual];
+    document.getElementById("question").textContent = p.pergunta;
+    p.respostas.forEach((resposta, index) => {
+      document.getElementById(`btn${index}`).textContent = resposta;
+    });
+  }
+
+  function responder(respostaSelecionada) {
+    const pergunta = perguntas[perguntaAtual];
+    if (respostaSelecionada === pergunta.correta) {
+      pontos++;
+      alert("✅ Resposta correta!");
+    } else {
+      alert("❌ Resposta incorreta.");
+    }
+
+    perguntaAtual++;
+    mostrarPergunta();
+  }
+
+  mostrarPergunta();
+</script>
+
+</body>
+</html>
